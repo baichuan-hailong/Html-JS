@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	div.container{
+		width: 240px;
+		margin: 10px;
+	}
+	ul#tab_menu{
+		display: inline;
+	}
+	li{
+		display: inline-block;
+		margin: -1px 1px;
+		padding: 1px;
+		border: 1px solid #666;
+	}
+	ul#tab_menu li{
+		cursor: pointer;
+	}
+	li.selected{
+		background-color: #06c;
+		color: #fff;
+	}
+	div#tab_content{
+		border: 1px solid #666;
+		width: 240px;
+		height: 180px;
+	}
+	div.hidden{
+		display: none;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<ul id="tab_menu">
+			<li class="selected">实事</li>
+			<li>体育</li>
+			<li>娱乐</li>
+		</ul>
+		<div id="tab_content">
+			<div>实事实事实事实事实事实事实事实事实事实事实事实事</div>
+			<div class="hidden">体育体育体育体育体育体育体育体育体育体育体育体育体育</div>
+			<div class="hidden">娱乐娱乐娱乐娱乐娱乐娱乐娱乐娱乐娱乐娱乐娱乐娱乐娱乐</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		$("#tab_menu li").click( function(){
+			$(this).addClass("selected").siblings("li").removeClass("selected");
+			var x = $(this).index();
+			// console.log( x );
+			$("#tab_content div").eq( x ).removeClass("hidden").siblings("div").addClass("hidden");
+		} );
+	} );
+</script>
+</body>
+</html>

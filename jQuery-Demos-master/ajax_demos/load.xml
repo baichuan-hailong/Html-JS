@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Info>
+	<User id="1">
+		<name>牛三</name>
+		<cellnumber>123444</cellnumber>
+		<address>Beijing</address>
+	</User>
+	<User id="2">
+		<name>曲四</name>
+		<cellnumber>123555</cellnumber>
+		<address>Shandong</address>		
+	</User>
+	<User id="3">
+		<name>张五</name>
+		<cellnumber>123654</cellnumber>
+		<address>Guangdong</address>
+	</User>
+</Info>

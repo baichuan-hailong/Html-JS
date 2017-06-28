@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+
+	/* 页面内容 */
+	#list{
+		padding: 10px;
+	}
+	#list li button{
+		margin-left: 30px;
+		padding: 0 7px;
+	}
+	li{
+		border: 1px dashed #ccc;
+	}
+
+	/* 遮罩层 */
+	#mask{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		opacity: 0.6;
+		z-index: 99;
+		display: none;
+	}
+
+	/* 对话框 */
+	#dialog{
+		width: 240px;
+		height: 180px;
+		border: 4px solid #444;
+		z-index: 999;
+		background-color: #fff;
+		position: absolute;
+		display: none;
+	}
+	#dialog .title,.btns{
+		width: 240px;
+		height: 36px;
+		background-color: #ccc;
+		line-height: 36px;
+	}
+	#dialog .title{
+		color: #fff;
+		font-weight: bold;
+	}
+	#dialog .title span{
+		margin-left: 10px;
+	}
+	#dialog .title img{
+		float: right;
+		margin: 12px 12px 0 0;
+		cursor: pointer;
+	}
+	#dialog .content{
+		height: 108px;
+		line-height: 108px;
+	}
+	#dialog .btns{
+		width: 80px;
+		padding-left: 160px;
+		overflow: hidden;
+	}
+	#dialog .btns button{
+		padding: 0 2px;
+	}
+</style>
+</head>
+
+<body>
+	<ul id="list">
+		<li id="0"><input type="checkbox" value="0" /><span>这第一条记录</span>&nbsp;&nbsp;<button>删除</button></li>
+		<li id="1"><input type="checkbox" value="1" /><span>这第二条记录</span>&nbsp;&nbsp;<button>删除</button></li>
+		<li id="2"><input type="checkbox" value="2" /><span>这第三条记录</span>&nbsp;&nbsp;<button>删除</button></li>
+		<li id="3"><input type="checkbox" value="3" /><span>这第四条记录</span>&nbsp;&nbsp;<button>删除</button></li>
+	</ul>
+	
+	<div id="mask"></div>
+
+	<div id="dialog">
+		<div class="title"><span>删除时提示</span><img src="../images/close.gif" /></div>
+		<div class="content">
+			<span><img src="../images/alert.jpg" />您真的要删除这条记录吗？</span>
+		</div>
+		<div class="btns">
+			<button class="confirm">确定</button>
+			<button class="cancel">取消</button>
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		//对话框位置自适应函数
+		function setDialogPosition() {
+			var Win = $(window);
+			var Cur = $("#dialog");
+			//窗口
+			var winW = Win.width();
+			var winH = Win.height();
+			//滚动条
+			var scL = Win.scrollLeft();
+			var scT = Win.scrollTop();
+			//对话框
+			var curW = Cur.width();
+			var curH = Cur.height();
+			//对话框位置
+			var left = scL + (winW - curW)/2;
+			var top = scT + (winH - curH)/2;
+			Cur.css({
+				"left": left,
+				"top": top
+			});
+		}
+
+		//遮罩及对话框处理函数
+		function maskAndDialogHidden() {
+			$("#mask").hide();
+			$("#dialog").hide();
+		}
+
+
+		$("#list li button").click( function(){
+			$("#mask").show();
+			setDialogPosition();
+			$("#dialog").show();
+		} );
+
+		$(window).resize( function(){
+			if( $("#dialog").is(":visible") ){
+				setDialogPosition();
+			}
+		} );
+			
+		$("#dialog .title img").click( function(){
+			maskAndDialogHidden();
+		} );
+
+		$("#dialog .btns .cancel").click( function(){
+			maskAndDialogHidden();
+		} );
+
+		$("#dialog .btns .confirm").click( function(){
+			maskAndDialogHidden();
+			$("#list li input[type='checkbox']").each( function( i ){
+				// console.log( i );
+				// console.log( this );
+				// console.log( $(this).prop("checked") );
+				var x = $(this).val();
+				if( this.checked ){//也可使用 $(this).prop("checked")
+					$("#list li").each( function(){
+						if( $(this).attr("id") == x ){
+							$(this).remove();
+						}
+					} );
+				}
+			} );
+		} );
+	} );
+</script>
+</body>
+</html>

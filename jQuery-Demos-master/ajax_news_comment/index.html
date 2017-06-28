@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	a{
+		text-decoration: none;
+	}
+	.container{
+		width: 380px;
+		border: 1px solid #666;
+		padding: 5px;
+		margin-left: 2px;
+	}
+	.title{
+		background-color: #ccc;
+		font-weight: bold;
+		padding: 3px 0;
+	}
+	.push .push_title span{
+		display: none;
+	}
+	textarea{
+		width: 280px;
+	}
+	.push .push_btns button{
+		margin-left: 15px;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="title">
+			<span>最新点评</span>
+		</div>
+		<div class="content"></div>
+		<div class="push">
+			<div class="push_title">
+				发表评论<span id="msg">正在发送数据请求...</span>
+			</div>
+			<div class="push_content">
+				<textarea class="text_info" rows="6"></textarea>
+			</div>
+			<div class="push_btns">
+				用户名：<input class="user_name" type="text" name="user_name" /><button>发表</button>
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function () {
+		function loadData(){
+			$.ajax({
+				type: "GET",
+				url: "CommentData.xml",
+				dataType: "xml",
+				success: function( response ){
+					var htm = "";
+					if( $( response ).find("Data").length == 0 ){
+						htm = "抱歉，没有找到点评数据。";
+					}
+					$( response ).find("Data").each( function(){
+						htm += "<div class='sub_container' style='border:1px solid #ccc'>" +
+						 			 "<a href=''>威海网友" + $(this).find("name").text() + "</a>" +
+									 "<p>" + $(this).find("content").text() + "</p>" +
+									 "<span style='float:right'>发表时间&nbsp;" + $(this).find("date").text() + "</span>" +
+									 "<div style='clear:both'></div>" + 
+									 "</div>";
+					} );
+					$(".content").html( htm );
+				}
+			});
+		}
+
+		$("#msg").ajaxStart( function(){
+			$(this).show();
+		} ).ajaxStop( function(){
+			$(this).html("数据获取完毕。").hide(1000);
+		} );
+
+		loadData();
+		
+		$(".push .push_btns button").click( function(){
+			var user_name = $("input.user_name").val();
+			var user_content = $("textarea.text_info").val();
+			// console.log( user_content );
+			$.ajax({
+				type: "GET",
+				url: "DataOperate.php",
+				dataType: "html",
+				data:{
+					name: user_name,
+					content: user_content 
+				},
+				success: function( response ){
+					alert( response );
+					loadData();
+					$("textarea.text_info").text("");
+					$("input.user_name").text("");
+				}
+			});
+		} );
+	} );
+</script>
+</body>
+</html>

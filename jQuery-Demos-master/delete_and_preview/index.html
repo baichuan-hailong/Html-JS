@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数据管理</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=uft-8" />
+<style type="text/css">
+	table{
+		border-collapse: collapse;
+		text-align: center;
+		margin: 0 auto;
+	}
+	
+	/* 预览大图 */
+	#img_show{
+		position: absolute;
+		display: none;
+	}
+
+	/* 遮罩层 */
+	#mask{
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		opacity: 0.8;
+		z-index: 99;
+		display: none;
+	}
+
+	/* 对话框 */
+	#dialog{
+		width: 240px;
+		height: 180px;
+		border: 2px solid #666;
+		z-index: 999;
+		background-color: #fff;
+		position: absolute;
+		display: none;
+	}
+	#dialog .title,.btns{
+		width: 240px;
+		height: 36px;
+		background-color: #ccc;
+		line-height: 36px;
+	}
+	#dialog .title{
+		color: #fff;
+		font-weight: bold;
+	}
+	#dialog .title span{
+		margin-left: 10px;
+	}
+	#dialog .title img{
+		float: right;
+		margin: 12px 12px 0 0;
+		cursor: pointer;
+	}
+	#dialog .content{
+		height: 108px;
+		line-height: 108px;
+	}
+	#dialog .btns{
+		width: 80px;
+		padding-left: 160px;
+		overflow: hidden;
+	}
+	#dialog .btns button{
+		padding: 0 2px;
+	}
+</style>
+</head>
+
+<body>
+	<table class="employee" border="1" cellpadding="3">
+		<tr><th>选项</th><th>编号</th><th>封面</th><th>购书人</th><th>性别</th><th>购书价</th></tr>
+		<tr id="0"><td><input type="checkbox" name="check1" value="0" /></td><td>1001</td><td><img src="../images/1.jpg" /></td><td>李小明</td><td>男</td><td>36.50元</td></tr>
+		<tr id="1"><td><input type="checkbox" name="check2" value="1" /></td><td>1002</td><td><img src="../images/2.jpg" /></td><td>王小明</td><td>女</td><td>37.50元</td></tr>
+		<tr id="2"><td><input type="checkbox" name="check3" value="2" /></td><td>1003</td><td><img src="../images/3.jpg" /></td><td>张小明</td><td>女</td><td>38.50元</td></tr>
+		<tr id="3"><td><input type="checkbox" name="check4" value="3" /></td><td>1004</td><td><img src="../images/4.jpg" /></td><td>李小明</td><td>男</td><td>39.50元</td></tr>
+		<tr><td colspan="6"><input class="check_all" type="checkbox" name="check_all" />全选&nbsp;<button id="del">删除</button></td></tr>
+	</table>
+
+	<img id="img_show" />
+
+	<div id="mask"></div>
+
+	<div id="dialog">
+		<div class="title"><span>删除时提示</span><img src="../images/close.gif" /></div>
+		<div class="content">
+			<span><img src="../images/alert.jpg" />您真的要删除这条记录吗？</span>
+		</div>
+		<div class="btns">
+			<button class="confirm">确定</button>
+			<button class="cancel">取消</button>
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		//对话框位置自适应函数
+		function setDialogPosition() {
+			var Win = $(window);
+			var Cur = $("#dialog");
+			//窗口
+			var winW = Win.width();
+			var winH = Win.height();
+			//滚动条
+			var scL = Win.scrollLeft();
+			var scT = Win.scrollTop();
+			//对话框
+			var curW = Cur.width();
+			var curH = Cur.height();
+			//对话框位置
+			var left = scL + (winW - curW)/2;
+			var top = scT + (winH - curH)/2;
+			Cur.css({
+				"left": left,
+				"top": top
+			});
+		}
+
+		//遮罩及对话框处理函数
+		function maskAndDialogHidden() {
+			$("#mask").hide();
+			$("#dialog").hide();
+		}
+
+		//隔行变色
+		$("tr:nth-child(odd)").css("background-color", "#ddd");
+		$("tr:first").css("background-color", "#999");		
+
+		//全选
+		$("input.check_all").click( function(){
+			// console.log(1);
+			if( this.checked ){//原来是要这么写啊！！！
+				// console.log(2);
+				$("input[type='checkbox']").each( function(){
+					$(this).attr("checked", true);
+				} );
+			}else{
+				$("input[type='checkbox']").each( function(){
+					$(this).attr("checked", false);
+				} );
+				// console.log(3);
+			}
+		} );
+
+		//删除记录对话框
+		$("#del").click( function(){
+			$("#mask").show();
+			setDialogPosition();
+			$("#dialog").show();
+		} );
+		$("#dialog .btns .confirm").click( function(){
+			maskAndDialogHidden();
+			$("tr td input[type='checkbox']:not('.check_all')").each( function(index){
+				// console.log( index );
+				if( this.checked ){
+					$("table tr[id=" + this.value + "]").remove();
+				}
+			} );
+		} );
+		$("#dialog .title img").click( function(){
+			maskAndDialogHidden();
+		} );
+		$("#dialog .btns .cancel").click( function(){
+			maskAndDialogHidden();
+		} );
+
+		//大图预览
+		var x = 5;
+		var y = 15;
+		$("tr td img").mousemove( function(e){
+			console.log( this.src );
+			$("#img_show").attr("src", this.src).css({
+				"left": ( e.pageX + x ) + "px",
+				"top": ( e.pageY + y ) + "px",
+				/* 存在“抖动”问题，未解决 */
+				"width": ( this.width * 1.5 ) + "px",
+				"height": ( this.height * 1.5 ) + "px"
+			}).show();
+		} )
+		.mouseout( function(){
+			$("#img_show").hide(100);
+		} );
+	} );
+</script>
+</body>
+</html>

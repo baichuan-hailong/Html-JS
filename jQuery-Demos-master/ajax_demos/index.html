@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		padding-left: 3px;
+	}
+
+	#container{
+		border: 5px solid #fe0;
+		/*display: inline-flex;*/
+		padding: 10px;
+		margin-top: 5px;
+	}
+	#msg{
+		display: none;
+		background-color: #0f0;
+	}
+	button{
+		padding: 5px;
+	}
+	fieldset{
+		padding: 10px;
+	}
+</style>
+</head>
+
+<body>
+	<p>
+		<button id="btn_1">加载内容(.php/.html/.txt)</button>&nbsp;
+		<button id="btn_2">加载内容(.json)</button>&nbsp;
+		<button id="btn_3">加载内容(.script)</button>&nbsp;
+		<button id="btn_4">加载内容(.xml/.html/.json/.js/.txt)</button>
+	</p>
+	<div id="container">
+		alt
+	</div>
+
+	<hr /><br />
+	<fieldset>
+		<legend>全局Ajax事件示例</legend>
+		<p>数据：<input id="info_data" type="text" name="info_data" />&nbsp;<button id="btn_5">发送</button></p>
+		<div id="msg">&nbsp;</div>
+	</fieldset>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		// 1、获取.php/.html/.txt文件信息
+		$("#btn_1").click( function(){
+			// 注意load使用POST方式，相当于$.post()，$.get()是使用GET方式
+			// $.get()获取的数据量小，且会保存在浏览器缓存中，有安全风险
+			$("#container").load( "server_post.php", {
+				"date": Date()
+			}, function( response, status, xhr ){
+				console.log( xhr.status + " | " + xhr.statusText + " | " + response + " | " + status );
+			} );	
+		} );
+
+		// 2、获取.json文件信息
+		$("#btn_2").click( function(){
+			$.getJSON( "load.json", function( data ){
+				var str = "";
+				$.each( data, function( i, val ){
+					str += "<p>" + 
+								 "姓名：" + val["name"] + "<br />" +
+								 "手机：" + val["cellnumber"] + "<br />" + 
+								 "地址：" + val["address"] + "<hr />" +
+								 "</p>";
+				} );
+				$("#container").html( str );
+			} );
+		} );
+
+		// 3、导入脚本文件(自动执行)
+		$("#btn_3").click( function(){
+			$.getScript( "load.js", function(){
+				console.log("load js file success!");
+			} );
+		} );
+
+		// 4、获取.xml文件信息
+		$("#btn_4").click( function(){
+			$.get( "load.xml", function( data ){
+				var str = "";
+				$( data ).find("User").each( function(){//遍历各<User>标签
+					str += "<p>" +
+								 "姓名：" + $(this).find("name").text() + "<br />" +
+								 "手机：" + $(this).find("cellnumber").text() + "<br />" +
+								 "地址：" + $(this).find("address").text() + "<hr />" +
+								 "</p>";
+				} );
+				$("#container").html( str );
+			} );
+		} );
+
+		// 5、设置全局Ajax(默认)（此处存在bug，尚未解决）
+		// $.ajaxSetup({
+		// 	type: "GET",
+		// 	url: "load.xml",
+		// 	dataType: "xml",
+		// 	complete: function( XMLHttpRequest, strStatus ){
+		// 		var str = "";
+		// 		XMLHttpRequest.responseText().find("User").each( function(){//遍历各<User>标签
+		// 			str += "<p>" +
+		// 						 "姓名：" + $(this).find("name").text() + "<br />" +
+		// 						 "手机：" + $(this).find("cellnumber").text() + "<br />" +
+		// 						 "地址：" + $(this).find("address").text() + "<hr />" +
+		// 						 "</p>";
+		// 		} );
+		// 		$("#container").html( str );
+		// 	},
+		// 	async: true,
+		// 	cache: false
+		// });
+		// $("#btn_4").click( function(){
+		// 	$.ajax({
+		// 		success: function( data ){
+		// 			alert("success load xml file!");
+		// 		}
+		// 	});
+		// } );
+
+		// 6、全局Ajax事件
+		$("#msg").ajaxStart( function(){
+			$(this).text("正在发送数据请求...").show();
+		} );
+		$("#msg").ajaxStop( function(){
+			$(this).text("已成功获取数据。").hide(3000);
+		} );
+		$("#btn_5").click( function(){
+			$.ajax({//jQuery中的最底层ajax方法
+				type: "GET",
+				url: "server_get.php",
+				data: {
+					textData: encodeURI( $("#info_data").val() )
+				},
+				dataType: "html",
+				success: function( data ){
+					$("#msg").html( decodeURI( data ) ).show();
+					// console.log( data );
+				}
+			});
+		} );
+	} );
+</script>
+</body>
+</html>

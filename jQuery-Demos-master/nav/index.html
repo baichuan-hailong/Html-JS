@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	a{
+		text-decoration: none;
+		color: #000;
+	}
+	ul,li{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	ul{
+		width: 190px;
+		border-collapse: collapse;
+		margin-top: 5px;
+		background-color: #fffdd2;
+	}
+	ul.tip, img#sort{
+		position: absolute;
+		display: none;
+	}
+	.content > li{
+		border: 1px dashed #ccc; 
+		padding: 5px;
+	}
+	.content > li.over{
+		background-color: #fff;
+	}
+	.tip{
+		width: 190px;
+		border: 2px solid #ffa200;
+		background-color: #fff;
+		padding: 10px;
+	}
+	.tip li:hover{
+		background-color: #eee;
+	}
+</style>
+</head>
+
+<body>
+	<ul>
+		<li>
+			<div>
+				<img src="../images/icon.gif" />
+				<span>电脑数码类产品</span>
+			</div>
+
+			<ul class="content">
+				<li class="opt"><a href="#">笔记本</a></li>
+				<ul class="tip">
+					<li><a href="#">笔记本1</a></li>
+					<li><a href="#">笔记本2</a></li>
+					<li><a href="#">笔记本3</a></li>
+				</ul>
+
+				<li class="opt"><a href="#">移动硬盘</a></li>
+				<ul class="tip">
+					<li><a href="#">移动硬盘1</a></li>
+					<li><a href="#">移动硬盘2</a></li>
+					<li><a href="#">移动硬盘3</a></li>
+				</ul>
+
+				<li class="opt"><a href="#">数码配件</a></li>
+				<ul class="tip">
+					<li><a href="#">数码配件1</a></li>
+					<li><a href="#">数码配件2</a></li>
+					<li><a href="#">数码配件3</a></li>
+				</ul>
+			</ul>
+
+			<img id="sort" src="../images/sort.gif" />
+		</li>
+	</ul>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		var curY;//当前元素top
+		var curW;//当前元素width
+		var curH;//当前元素height
+		var arrX;//提示箭头left
+		var arrY;//提示箭头top
+		var curObj;//当前对象
+		
+		//位置信息获取函数
+		function getPositionVal( obj ){
+			curY = obj.offset().top;
+			curW = obj.width();
+			curH = obj.height();
+			arrX = ( curW - 5 ) + "px";
+			arrY = ( curY + curH/2 ) + "px";
+		}
+
+		$(".opt").mouseover( function(){
+			curObj = $(this);
+			getPositionVal( curObj );
+			var allY = curY - curH + "px";//???
+			curObj.addClass("over");
+			curObj.next("ul").show().css({
+				"top": allY,
+				"left": curW
+			});
+			$("#sort").show().css({
+				"top": arrY,
+				"left": arrX
+			});
+		} ).mouseout( function(){
+			$(this).removeClass("over");
+			$(this).next("ul").hide();
+			$("#sort").hide();
+		} );
+
+		$(".tip").mousemove( function(){
+			$(this).show();
+			curObj = $(this).prev("li")
+			getPositionVal( curObj );
+			$("#sort").show().css({
+				"left": arrX,
+				"top": arrY
+			});
+		} ).mouseout( function(){
+			$(this).hide();
+			$("#sort").hide();
+		} );
+	} );
+</script>
+</body>
+</html>

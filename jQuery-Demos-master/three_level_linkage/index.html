@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	.container{
+		border: 1px solid #ccc;
+		/*text-align: center;*/
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		厂商：<select id="selcF"><option>请选择</option></select>
+		品牌：<select id="selcT"><option>请选择</option></select>
+		型号：<select id="selcC"><option>请选择</option></select>
+		<button id="btn_query">查询</button>
+		<p id="msg"></p>
+	</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		// console.log( $("option").val() );
+
+		//初始化（重置）函数
+		function selectInit( selc ){
+			$(selc).html("<option>请选择</option>");
+		}
+
+		//原始数据
+		var arrData = {
+			厂商1:{
+				品牌1_1:"型号1_1_1,型号1_1_2",
+				品牌1_2:"型号1_2_1,型号1_2_2"
+			},
+			厂商2:{
+				品牌2_1:"型号2_1_1,型号2_1_2",
+				品牌2_2:"型号2_2_1,型号2_2_2"
+			},
+			厂商3:{
+				品牌3_1:"型号3_1_1,型号3_1_2",
+				品牌3_2:"型号3_2_1,型号3_2_2"
+			}
+		};
+		
+		$.each( arrData, function( pF ){
+			$("#selcF").append("<option>" + pF + "</option>");
+		} );
+
+		//一、二级联动
+		$("#selcF").change( function(){
+			selectInit("#selcT");
+			selectInit("#selcC");
+			$.each( arrData, function( pF, pS ){
+				if( pF == $("#selcF option:selected").val() ){
+					$.each( pS, function( pT, pC ){
+						$("#selcT").append("<option>" + pT + "</option>");
+					} );
+					//二、三级联动
+					$("#selcT").change( function(){
+						selectInit("#selcC");
+						$.each( pS, function( pT, pC ){
+							if( pT == $("#selcT option:selected").val() ){
+								$.each( pC.split(','), function(){
+									$("#selcC").append("<option>" + this + "</option>");//this指向当前被split分割出来的子串
+								} );
+							}
+						} );
+					} );
+				}
+			} );
+		} );
+
+		$("#btn_query").click( function(){
+			var msg = "您选择的厂商：" + $("#selcF option:selected").val() + " " +
+									"您选择的品牌：" + $("#selcT option:selected").val() + " " + 
+									"您选择的型号：" + $("#selcC option:selected").val();
+			$("p#msg")
+			.text( msg )
+			.css({
+				"background-color": "#ccc",
+				"font-weight": "700" /* font-weight:100~900, 400->normal, 700->bold */
+			});
+		} );
+	} );
+</script>
+</body>
+</html>

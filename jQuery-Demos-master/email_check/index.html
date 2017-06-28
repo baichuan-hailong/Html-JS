@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	.container{
+		border: 1px solid #ccc;
+		/*text-align: center;*/
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<p><input type="text" name="" />&nbsp;<span></span></p>
+		<p><input type="submit" name=""></p>
+	</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$( function(){
+		$("input[type='text']").trigger("focus");
+
+		$("input[type='text']").focus( function(){
+			$("span").text("请输入您的常用邮箱地址");
+		} ).blur( function(){
+			if( $("input[type='text']").val().length == 0 ){
+				$("span").text("邮箱地址不能为空！");
+			}else{
+				var f = checkEmail( $("input").val() );
+				if( f ){
+					$("span").html("<img src='../images/email_ok.gif' />");
+				}else{
+					$("span").text("请输入正确的邮箱地址！");
+				}
+			}
+		} );
+
+		function checkEmail( emailStr ){
+			if( /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/.test( emailStr ) ){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	} );
+</script>
+</body>
+</html>
