@@ -9,6 +9,9 @@
 	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
 <style>
+body{
+	background-color: white;
+}
 .ui-block-a, 
 .ui-block-b, 
 .ui-block-c {
@@ -23,15 +26,15 @@
 <script>
 
 	$(document).on("pagebeforecreate",function(){
-	  alert("触发 pagebeforecreate 事件 - 页面即将初始化。jQuery Mobile 仍未开始增强页面。");
+	  // alert("触发 pagebeforecreate 事件 - 页面即将初始化。jQuery Mobile 仍未开始增强页面。");
 	}); 
 	                    
 	$(document).on("pagecreate",function(){
-	  alert("触发 pagecreate 事件 - 已创建页面，但增强未完成。");
+	  // alert("触发 pagecreate 事件 - 已创建页面，但增强未完成。");
 	});
 
 	$(document).on("pageinit",function(){
-	  alert("触发 pageinit 事件 - 页面已初始化，DOM 已加载，jQuery Mobile 已完成页面增强。")
+	  // alert("触发 pageinit 事件 - 页面已初始化，DOM 已加载，jQuery Mobile 已完成页面增强。")
 	}); 
 	
     //隐藏<p>标签
@@ -39,19 +42,19 @@
 	$(document).on("pageinit","#pageone",function(){
 
 	  $("p").on("click",function(){
-	    $(this).hide();
+	    // $(this).hide();
 	  });
 
 	  $("p").on("tap",function(){
-		$(this).hide();
+		// $(this).hide();
 	  });
 	  // 长按
 	  $("p").on("taphold",function(){
-	    $(this).hide();
+	    // $(this).hide();
 	  }); 
 	  // 滑动
 	  $("p").on("swipe",function(){
-	    $("#swipe_span").text("Swipe detected!");
+	    // $("#swipe_span").text("Swipe detected!");
 	  });
 
 	  //滚动
@@ -61,22 +64,30 @@
 
 	  //滚动结束
 	  $(document).on("scrollstop",function(){
-	    alert("停止滚动！");
+	    // alert("停止滚动！");
 	  });
 
 	  //Device方向
 	  $(window).on("orientationchange",function(event){
 	  	if (event.orientation=="portrait") {
-	  		alert("竖屏");
+	  		// alert("竖屏");
 	  	}else{
-	  		alert("横屏");
+	  		// alert("横屏");
 	  	};
 
 		//alert("方向是：" + event.orientation);
 	  });
-
-
 	});
+
+	cc=0
+	function changeimage(){
+	if (cc==0) {
+		cc=1
+		document.getElementById('myimage').src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulbon.gif"
+	}else{
+		cc=0
+		document.getElementById('myimage').src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulboff.gif"
+	}}
 
 </script>
 </head>
@@ -304,7 +315,16 @@
 		<p>点我也也消失</p>
 		<p><span id="swipe_span" style="color:red"></span></p>
 
+
+		<!-- DHTML -->
+		<h1 onmouseover="style.color='red'" onmouseout="style.color='black'">请把鼠标移动到文本上</h1>
+
+		<img id="myimage" onclick="changeimage()" border="0" src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulboff.gif" width="100" height="180" />
+		<p>请点击这个灯泡，把它点亮吧！</p>
+
 	</div> 
+
+
 
 <!-- Page 2 -->
 	<div data-role="page" id="pagetwo">
