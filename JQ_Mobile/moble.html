@@ -9,22 +9,23 @@
 	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
 <style>
-body{
-	background-color: white;
-}
-.ui-block-a, 
-.ui-block-b, 
-.ui-block-c {
-	background-color: lightgray;
-	border: 1px solid black;
-	height: 100px;
-	font-weight: bold;
-	text-align: center;
-	padding: 30px;
-}
+	body{
+		background-color: white;
+	}
+	.ui-block-a, 
+	.ui-block-b, 
+	.ui-block-c {
+		background-color: lightgray;
+		border: 1px solid black;
+		height: 100px;
+		font-weight: bold;
+		text-align: center;
+		padding: 30px;
+	}
 </style>
-<script>
 
+
+<script>
 	$(document).on("pagebeforecreate",function(){
 	  // alert("触发 pagebeforecreate 事件 - 页面即将初始化。jQuery Mobile 仍未开始增强页面。");
 	}); 
@@ -88,6 +89,27 @@ body{
 		cc=0
 		document.getElementById('myimage').src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulboff.gif"
 	}}
+
+
+	//时钟
+	function startTime(){
+		var today=new Date()
+		var h=today.getHours()
+		var m=today.getMinutes()
+		var s=today.getSeconds()
+		// add a zero in front of numbers<10
+		m=checkTime(m)
+		s=checkTime(s)
+		document.getElementById('txt').innerHTML=h+":"+m+":"+s
+		t=setTimeout('startTime()',500)
+	}
+
+	function checkTime(i){
+		if (i<10) {
+			i="0" + i
+		}
+		return i
+	}
 
 </script>
 </head>
@@ -311,8 +333,7 @@ body{
 
 
 		<p>点我消失</p>
-		<p>点我也消失</p>
-		<p>点我也也消失</p>
+		
 		<p><span id="swipe_span" style="color:red"></span></p>
 
 
@@ -321,6 +342,10 @@ body{
 
 		<img id="myimage" onclick="changeimage()" border="0" src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulboff.gif" width="100" height="180" />
 		<p>请点击这个灯泡，把它点亮吧！</p>
+
+<!-- 时钟 -->
+		<body onload="startTime()">
+		<div id="txt"></div>
 
 	</div> 
 
