@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片切换</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="dist/slide3D-1.2.1.css" />
+		<style id="stylesheet">
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+			.slide3D img{
+				width: 100%;
+			}
+			.container3D{
+				background: #eee;
+				margin:10px;
+				float:left;
+			}
+			.title{
+				padding:10px;
+				color:#fff;
+				font-size:18px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<div class="container3D turn">
+				<div class="wrapper3D">
+				</div>
+				<div class="slide3D-pagination"></div>
+				<div class="slide3D-prev-button"></div>
+				<div class="slide3D-next-button"></div>
+			</div>
+		</div>
+
+		<script src="dist/slide3D-1.2.1.min.js"></script>
+
+		<script id="scripts">
+		    var width = 400;
+		    var height = 178;
+			
+			var mySlide3 = new Slide3D('.turn', {
+				width: width,
+				height:height,
+				effect: 'turn',  // flip | turn | slide | flat | fragment
+				sources: ['dist/image-slider-1.jpg',
+				'dist/image-slider-2.jpg',
+				'dist/image-slider-3.jpg',
+				'dist/image-slider-4.jpg',
+				'dist/image-slider-5.jpg'],
+				box:{
+					rows: 16,  // 切割行
+					cols: 6  // 切割列
+				},
+				pagination: false,  // 是否添加分页器
+				paginationClickable: false,
+				autoplay: 2000
+				// autoplayDisableOnInteraction : false
+			});
+			
+			
+		</script>
+	</body>
+</html>
