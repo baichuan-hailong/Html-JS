@@ -1,0 +1,21 @@
+/*--------------------------全--局-------------------------------*/
+body{
+	margin:0;
+	padding:10px;
+	font-size:14px;
+	font-family: "微软雅黑", "宋体", "Trebuchet MS", Tahoma, Arial, sans-serif;
+	background:url("../images/bg-top.png") repeat-x 0 0;
+	color: red;
+}
+
+/*去除底部loading*/
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0} 
+
+#mycon{
+	margin:0;
+	padding:0;
+	color: orange;
+	text-align: center;
+}
