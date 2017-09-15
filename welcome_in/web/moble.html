@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Title Mobile</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+<style>
+	body{
+		background-color: white;
+	}
+	.ui-block-a, 
+	.ui-block-b, 
+	.ui-block-c {
+		background-color: lightgray;
+		border: 1px solid black;
+		height: 100px;
+		font-weight: bold;
+		text-align: center;
+		padding: 30px;
+	}
+</style>
+
+
+<script>
+	$(document).on("pagebeforecreate",function(){
+	  // alert("触发 pagebeforecreate 事件 - 页面即将初始化。jQuery Mobile 仍未开始增强页面。");
+	}); 
+	                    
+	$(document).on("pagecreate",function(){
+	  // alert("触发 pagecreate 事件 - 已创建页面，但增强未完成。");
+	});
+
+	$(document).on("pageinit",function(){
+	  // alert("触发 pageinit 事件 - 页面已初始化，DOM 已加载，jQuery Mobile 已完成页面增强。")
+	}); 
+	
+    //隐藏<p>标签
+    //Page 1
+	$(document).on("pageinit","#pageone",function(){
+
+	  $("p").on("click",function(){
+	    // $(this).hide();
+	  });
+
+	  $("p").on("tap",function(){
+		// $(this).hide();
+	  });
+	  // 长按
+	  $("p").on("taphold",function(){
+	    // $(this).hide();
+	  }); 
+	  // 滑动
+	  $("p").on("swipe",function(){
+	    // $("#swipe_span").text("Swipe detected!");
+	  });
+
+	  //滚动
+	  $(document).on("scrollstart",function(){
+	    //alert("开始滚动！");
+	  });
+
+	  //滚动结束
+	  $(document).on("scrollstop",function(){
+	    // alert("停止滚动！");
+	  });
+
+	  //Device方向
+	  $(window).on("orientationchange",function(event){
+	  	if (event.orientation=="portrait") {
+	  		// alert("竖屏");
+	  	}else{
+	  		// alert("横屏");
+	  	};
+
+		//alert("方向是：" + event.orientation);
+	  });
+	});
+
+	cc=0
+	function changeimage(){
+	if (cc==0) {
+		cc=1
+		document.getElementById('myimage').src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulbon.gif"
+	}else{
+		cc=0
+		document.getElementById('myimage').src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulboff.gif"
+	}}
+
+
+	//时钟
+	function startTime(){
+		var today=new Date()
+		var h=today.getHours()
+		var m=today.getMinutes()
+		var s=today.getSeconds()
+		// add a zero in front of numbers<10
+		m=checkTime(m)
+		s=checkTime(s)
+		document.getElementById('txt').innerHTML=h+":"+m+":"+s
+		t=setTimeout('startTime()',500)
+	}
+
+	function checkTime(i){
+		if (i<10) {
+			i="0" + i
+		}
+		return i
+	}
+
+</script>
+</head>
+
+
+<body>
+
+<!-- Page 1 -->
+	<div data-role="page" id="pageone">
+	  <div data-role="content">
+	    <p>Page one!</p>
+	    <a href="#pagetwo" data-transition="slide">Jump Two Page</a>
+	  </div>
+
+	  <div data-role="content">
+	    <a href="#pagethree" data-rel="dialog">弹窗</a>
+	  </div>
+
+      
+	  <button>按钮</button>
+	  <input type="button" value="按钮">
+	  <a href="#" data-role="button">按钮</a>
+
+
+	  <a href="#pagetwo" data-transition="slide" data-role="button" data-inline="true">Jump Two Page</a>
+	  <a href="#pagelist" data-transition="slide" data-role="button" data-inline="true">Jump List Page</a>
+	  <a href="#pagetwo" data-role="button" data-inline="true">Jump Two Page</a>
+
+	  <!-- 图标 -->
+	  <a href="#link" data-role="button" data-icon="search" data-iconpos="top">Top</a>
+      <a href="#link" data-role="button" data-icon="search" data-iconpos="right">Right</a>
+      <a href="#link" data-role="button" data-icon="search" data-iconpos="bottom">Bottom</a>
+      <a href="#link" data-role="button" data-icon="search" data-iconpos="left">Left</a>
+
+
+      <div data-role="collapsible-set" data-inset="false">
+	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>文档！</h3>
+	  	    <p>软件文档或者源代码文档是指与软件系统及其软件工程过程有关联的文本实体。文档的类型包括软件需求文档，设计文档，测试文档，用户手册等。其中的需求文档，设计文档和测试文档一般是在软件开发过程中由开发者写就的，而用户手册等非过程类文档是由专门的非技术类写作人员写就的。</p>
+	      </div>
+	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>点击我 - 我可以折叠！</h3>
+	        <p>文件的另一种称呼，一般将WORD，EXCEL等文字编辑软件产生的文件叫做文档。
+				这样说不够精确，文件，文件夹，与文档，三个的关系是不同，但又有相同的地方，所以，要阐述准确，要表达三者的含义与联系。
+				文件概念
+				1>大范围：是在电脑里看见的东西都叫文件.
+				2>小范围：文件是以单个名称在计算机上存储的信息集合。文件可以是文本文档、图片、程序等等。文件通常具有三/四个字母的文件扩展名，用于指示文件类别（例如，图片文件常常以JPEG格式保存并且文件扩展名为 .jpg）。
+				总结——文件（大范围）包括：文件夹，文件，（小范围）
+				文件夹概念
+				是用来协助人们管理计算机文件的，每一个文件夹对应一块磁盘空间，它提供了指向对应空间的地址，它没有扩展名，也就不象文件那样格式用扩展名来标识。但它有几种类型，如：文档、图片、相册、音乐、音乐集等等；
+				文件（小范围）与文件夹的区别
+				相同处：都是文件（大范围）；都有类型；都占空间
+				不同之处：文件有扩展名，文件夹没有，
+				文件（小的范围）与文件夹的区别：看他们的属性，类型是什么！</p>
+	      </div>
+	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>点击我 - 我可以折叠！</h3>
+	        <p>我是可折叠的内容。</p>
+	      </div>
+	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>点击我 - 我可以折叠！</h3>
+	        <p>我是可折叠的内容。</p>
+	      </div>
+	  </div>
+
+
+	  <p>三列样式布局：</p>
+	  <div class="ui-grid-b">
+	    <div class="ui-block-a"><span>第一个列</span></div>
+	    <div class="ui-block-b"><span>第二个列</span></div>
+	    <div class="ui-block-c"><span>第三个列</span></div>
+	  </div>
+
+	  <h2>有序列表：</h2>
+	  <ol data-role="listview">
+	    <li><a href="#">列表项</a></li>
+	    <li><a href="#">列表项</a></li>
+	    <li><a href="#">列表项</a></li>
+	  </ol>
+	  <h2>无序列表：</h2>
+	  <ul data-role="listview">
+	    <li><a href="#pagetwo" data-transition="slide">Page Two</a></li>
+	    <li><a href="#pagesearch">Search View</a></li>
+	    <li><a href="#">列表项</a></li>
+	  </ul>
+
+
+
+	  <h2>我的通讯录</h2>
+	  <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true">
+	  	<br>
+	    <li><a href="#">Adele</a></li>
+	    <li><a href="#">Agnes</a></li>
+	    <li><a href="#">Alpha</a></li>
+	    <li><a href="#">Albert</a></li>
+	    <li><a href="#">Billy</a></li>
+	    <li><a href="#">Bob</a></li>
+	    <li><a href="#">Calvin</a></li>
+	    <li><a href="#">Cameron</a></li>
+	    <li><a href="#">Chloe</a></li>
+	    <li><a href="#">Christina</a></li>
+	    <li><a href="#">Diana</a></li>
+	    <li><a href="#">Gabriel</a></li>
+	    <li><a href="#">Glen</a></li>
+	    <li><a href="#">Ralph</a></li>
+	    <li><a href="#">Valarie</a></li>
+	  </ul>
+
+
+	  <br>
+	  <ul data-role="listview">
+		  <li><a href="#">Inbox<span class="ui-li-count">335</span></a></li>
+		  <li><a href="#">Sent<span class="ui-li-count">123</span></a></li>
+		  <li><a href="#">Trash<span class="ui-li-count">7</span></a></li>
+	  </ul>
+
+
+	  <form method="post" action="demoform.asp">
+		  <div data-role="fieldcontain">
+		    <!-- <label for="fullname">全名：</label> -->
+		    <p>姓名</p>
+		    <input type="text" name="fullname" id="fullname">
+		    <!-- <br> -->
+		    <!-- <label for="bday">生日：</label> -->
+		    <p>生日</p>
+		    <input type="date" name="bday" id="bday">
+		    <!-- <br> -->
+		    <!-- <label for="email">电邮：</label> -->
+		    <p>邮箱</p>
+		    <input type="email" name="email" id="email" placeholder="您的邮件地址..">
+		  </div>
+      </form>
+      <input type="submit" data-inline="true" value="提交">
+
+      <select name="day" id="day">
+      	 <optgroup label="1">
+         <option value="mon">星期一</option>
+         <option value="tue">星期二</option>
+         <option value="wed">星期三</option>
+         <option value="thu">星期四</option>
+         <option value="fri">星期五</option>
+         <optgroup label="2">
+         <option value="sat">星期六</option>
+         <option value="sun">星期日</option>
+        </select>
+
+        <select name="switch" id="switch" data-role="slider">
+          <option value="on">On</option>
+          <option value="off" selected>Off</option>
+        </select>
+
+        <div data-role="collapsible" data-theme="b" data-content-theme="e">
+	      <h4>A</h4>
+	      <ul data-role="listview">
+	        <li><a href="#">Adam</a></li>
+	        <li><a href="#">Angela</a></li>
+	      </ul>
+	    </div>
+
+	    <div data-role="collapsible" data-theme="b" data-content-theme="a">
+		    <h4>B</h4>
+		    <ul data-role="listview">
+		       <li><a href="#">Bill</a></li>
+		       <li><a href="#">Bob</a></li>
+		    </ul>
+	    </div>
+
+	    <div data-role="collapsible" data-theme="b" data-content-theme="d">
+		    <h4>C</h4>
+		    <ul data-role="listview">
+		      <li><a href="#">Calvin</a></li>
+		      <li><a href="#">Cameron</a></li>
+		      <li><a href="#">Christina</a></li>
+		    </ul>
+	    </div>
+
+	    <!-- 主题化表单 -->
+		<div data-role="content" data-theme="e">
+		  <form method="post" action="demoform.asp">
+		  <div data-role="fieldcontain">
+		    <label for="name">全名：</label>
+		    <input type="text" name="text" id="name" placeholder="您的姓名..." data-theme="a">
+		    <br><br>
+		  
+		    <label for="search">您需要搜索什么？</label>
+		    <input type="search" name="search" id="search" placeholder="需要搜索的内容..." data-theme="d">
+		    <br><br>
+
+		    <label for="date">今天的日期：</label>
+		    <input type="date" name="date" id="date">
+		    <br><br>
+		 
+		    <label for="colors">请选择喜爱的颜色：</label>
+		    <select id="colors" name="colors" data-theme="b">
+		      <option value="red">红色</option>
+		      <option value="green">绿色</option>
+		      <option value="blue">蓝色</option>
+		    </select>
+		    <br><br>
+		 
+		    <label for="switch">切换开关：</label>
+		    <select name="switch" id="switch" data-role="slider" data-theme="a">
+		      <option value="on">On</option>
+		      <option value="off">Off</option>
+		    </select>
+		    <br><br>
+		  
+		   <div data-role="controlgroup">
+		   <legend>请选择喜爱的电影：</legend>
+		   <label for="mov1">蜘蛛侠</label>
+		   <input type="checkbox" name="mov1" id="mov1" data-theme="a">
+		   <label for="mov2">变形金刚</label>
+		   <input type="checkbox" name="mov2" id="mov2" data-theme="b">
+		   <label for="mov3">星球大战</label>
+		   <input type="checkbox" name="mov3" id="mov3" data-theme="c">
+		   </div>
+		  </div>
+		  <input type="submit" data-inline="true" value="提交">
+		  </form>
+		</div>
+
+
+		<p>点我消失</p>
+		
+		<p><span id="swipe_span" style="color:red"></span></p>
+
+
+		<!-- DHTML -->
+		<h1 onmouseover="style.color='red'" onmouseout="style.color='black'">请把鼠标移动到文本上</h1>
+
+		<img id="myimage" onclick="changeimage()" border="0" src="http://youc.oss-cn-beijing.aliyuncs.com/eg_bulboff.gif" width="100" height="180" />
+		<p>请点击这个灯泡，把它点亮吧！</p>
+
+<!-- 时钟 -->
+		<body onload="startTime()">
+		<div id="txt"></div>
+
+	</div> 
+
+
+
+<!-- Page 2 -->
+	<div data-role="page" id="pagetwo">
+	  <div data-role="header">
+		<a href="#pageone" data-role="button">首页</a>
+		<a href="#pagesearch" data-role="button" class="ui-btn-right" data-icon="search">搜索</a>
+		<h1>欢迎来到Page Two!</h1>
+		<div data-role="navbar">
+	      <ul>
+	        <li><a href="#pageone" data-icon="home">首页</a></li>
+	        <li><a href="#" data-icon="arrow-r">页面x</a></li>
+	        <li><a href="#pagesearch" data-icon="search">搜索</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  <div data-role="content">
+	    <p>Page Two!</p>
+	    <a href="#pageone">返回</a>
+	  </div>
+	</div> 
+
+<!-- Page pop -->
+	<div data-role="page" id="pagethree">
+	  <div data-role="content">
+	    <p>这是一个页面弹窗！</p>
+	    <a href="#pageone">取消</a>
+	  </div>
+	</div>
+
+<!-- Pagelist -->
+	<div data-role="page" id="pagelist">
+	  <div data-role="header" data-position="fixed">
+		<a href="#pageone" data-role="button">返回</a>
+		<h1>Page List!</h1>
+	  </div>
+
+	  <div data-role="content">
+	    <ul data-role="listview" data-inset="true">
+	      <li>
+	        <a href="#pageone">
+	        	<img src="http://youc.oss-cn-beijing.aliyuncs.com/chrome.png">
+	        	<h2>Google Chrome</h2>
+                <p>Google Chrome is a free, open-source web browser. Released in 2008.</p>
+	        </a>
+	      </li>
+	      <li>
+	        <a href="#pageone">
+	        	<img src="http://youc.oss-cn-beijing.aliyuncs.com/firefox.png">
+	        	<h2>Mozilla Firefox</h2>
+		        <p>Firefox is a web browser from Mozilla. Released in 2004.</p>
+		        <p>000Firefox is a web browser from Mozilla. Released in 2004.</p>
+		        <p>Firefox is a web browser from Mozilla. Released in 2004.</p>
+		        <p>000Firefox is a web browser from Mozilla. Released in 2004.</p>
+	        </a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/chrome.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/firefox.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/chrome.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/firefox.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/chrome.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/firefox.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/chrome.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/firefox.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/chrome.png"></a>
+	      </li>
+	      <li>
+	        <a href="#"><img src="http://youc.oss-cn-beijing.aliyuncs.com/firefox.png"></a>
+	      </li>
+	    </ul>
+	  </div>
+	</div> 
+
+
+<!-- Search View -->
+	<div data-role="page" id="pagesearch">
+	  <div data-role="header">
+		<a href="#pagetwo" data-role="button">Pagetwo!</a>
+		<h1>Search View</h1>
+	  </div>
+	  <div data-role="content">
+	    <p>Search View！</p>
+	    <a href="#pagetwo">取消</a>
+	  </div>
+
+		<p><b>提示：</b>敲击屏幕会隐藏或显示页眉和页脚。</p>
+  
+	    <p>Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..</p>
+
+	  <div data-role="footer" data-position="fixed" data-fullscreen="true">
+	      <div data-role="controlgroup" data-type="horizontal">
+	        <a href="#" data-role="button" data-icon="plus">转播到新浪微博</a>
+	        <a href="#" data-role="button" data-icon="plus">转播到腾讯微博</a>
+	        <a href="#" data-role="button" data-icon="plus">转播到QQ空间</a>
+	      </div>
+      </div>
+	</div>
+</body>
+
+</html>

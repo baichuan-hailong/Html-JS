@@ -1,0 +1,41 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <meta charset="utf-8"/> 
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=yes,user-scalable=no">
+  <style type="text/css">  
+    html{height:100%}  
+    body{height:100%;margin:0px;padding:10px}  
+    #containermap{height:100%}  
+</style> 
+<title>Baidu_position</title>  
+<script type="text/javascript">  
+    function initialize() {  
+      var mp = new BMap.Map('containermap');  
+      // 115.331124     34.454898 
+      point = new BMap.Point(115.331124, 34.454898);
+      mp.centerAndZoom(point, 12);  
+
+      var marker = new BMap.Marker(point);       // 创建标注    
+      mp.addOverlay(marker);                     // 将标注添加到地图中
+
+      mp.addEventListener("dragend", function(){    
+       var center = mp.getCenter();    
+       // alert("地图中心点变更为：" + center.lng + ", " + center.lat);    
+      });
+    }  
+       
+    function loadScript() {  
+      var script = document.createElement("script");  
+        //此为v2.0版本的引用方式  
+      script.src = "http://api.map.baidu.com/api?v=2.0&ak=CCXRXGje8oBWdghR3qG2VA8GXMZnkuup&callback=initialize";
+      document.body.appendChild(script);  
+    }  
+   
+    window.onload = loadScript;  
+</script>  
+</head>  
+<body>  
+  <div id="containermap" style="width:100%;height:160px"></div>  
+</body>  
+</html>

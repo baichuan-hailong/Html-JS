@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>图片切换</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="dist/slide3D-1.2.1.css" />
+		<title>Image chages title</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=yes,user-scalable=no">
+		<link rel="stylesheet" href="dist/slide3D-1.2.1.css"/>
 		<style id="stylesheet">
 			html,body{
 				width: 100%;
@@ -12,6 +12,7 @@
 			}
 			.slide3D img{
 				width: 100%;
+				text-align: center;
 			}
 			.container3D{
 				background: #eee;
@@ -39,20 +40,23 @@
 		<script src="dist/slide3D-1.2.1.min.js"></script>
 
 		<script id="scripts">
-		    var width = 400;
-		    var height = 178;
-			
+		    var width  = (window.screen.width-20);
+		    var height = (window.screen.width-20)/400*178;
+		    // 400 178
 			var mySlide3 = new Slide3D('.turn', {
 				width: width,
 				height:height,
 				effect: 'turn',  // flip | turn | slide | flat | fragment
-				sources: ['dist/image-slider-1.jpg',
-				'dist/image-slider-2.jpg',
-				'dist/image-slider-3.jpg',
-				'dist/image-slider-4.jpg',
-				'dist/image-slider-5.jpg'],
+				sources: ['http://youc.oss-cn-beijing.aliyuncs.com/slient5.png',
+				'http://youc.oss-cn-beijing.aliyuncs.com/ppt2.jpg',
+				'http://youc.oss-cn-beijing.aliyuncs.com/slient5.png',
+				'http://youc.oss-cn-beijing.aliyuncs.com/ppt2.jpg',
+				'http://youc.oss-cn-beijing.aliyuncs.com/slient5.png',
+				'http://youc.oss-cn-beijing.aliyuncs.com/ppt2.jpg',
+				'http://youc.oss-cn-beijing.aliyuncs.com/slient5.png',
+				'http://youc.oss-cn-beijing.aliyuncs.com/ppt2.jpg'],
 				box:{
-					rows: 16,  // 切割行
+					rows: 16,// 切割行
 					cols: 6  // 切割列
 				},
 				pagination: false,  // 是否添加分页器
@@ -60,8 +64,15 @@
 				autoplay: 2000
 				// autoplayDisableOnInteraction : false
 			});
-			
-			
+
+
+			// Listen for orientation changes
+			window.addEventListener("orientationchange", function() {
+				if (window.orientation==90||window.orientation==-90) {
+					alert('竖屏浏览吧，少年~~~');
+				};
+		    },false);
+
 		</script>
 	</body>
 </html>
