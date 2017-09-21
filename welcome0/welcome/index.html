@@ -86,10 +86,9 @@
 	  		// alert("竖屏");
 	  	}else{
 	  		// alert("横屏");
-	  		// alert('竖屏浏览吧，少年~~~');
+	  		alert('竖屏浏览吧，少年~~~');
 	  	};
 	  });
-
 	});
 
 
@@ -170,7 +169,6 @@
 		</div>
 
 		<!-- music -->
-		<!-- <audio autoplay="true" loop="true" src="http://youc.oss-cn-beijing.aliyuncs.com/music.mp3"></audio> -->
 		<span id="playbox" ></span>
         <audio id="mp3" loop="true" src="http://youc.oss-cn-beijing.aliyuncs.com/music.mp3"></audio>
     </div>
@@ -281,13 +279,13 @@
 	       // 115.331124     34.454898 
 	       point = new BMap.Point(115.331124, 34.454898);
 	       mp.centerAndZoom(point, 12);  
-
-	       var marker = new BMap.Marker(point);       // 创建标注    
-	       mp.addOverlay(marker);                     // 将标注添加到地图中
+           // marker
+	       var marker = new BMap.Marker(point);        
+	       mp.addOverlay(marker);
 
 	       mp.addEventListener("dragend", function(){    
 	       var center = mp.getCenter();    
-	       // alert("地图中心点变更为：" + center.lng + ", " + center.lat);    
+	       // alert("map center changed：" + center.lng + ", " + center.lat);    
 	       });
         }  
 
