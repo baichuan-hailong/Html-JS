@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>杜海龙&张茜我们结婚啦！</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="description" content="六年相伴！！！">
+    
+    
+    <!-- slide3D -->
+    <link rel="stylesheet" href="css/slide3D-1.2.1.css">
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+	<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
+	<link rel="stylesheet" href="css/welstyle.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.mobile-1.3.2.min.js"></script>
+
+<style>
+</style>
+
+
+<script>
+    //Page 1
+	$(document).on("pageinit","#pageone",function(){
+
+		// music btn
+		$(function(){
+	        $("#playbox").addClass("btn_musicplay");
+	        $("#playbox").click(function(){
+	        	if ($("#playbox").hasClass("btn_music")) {
+	        		var mp3=$("#mp3");
+	        		console.log(mp3);
+	        		$("#mp3")[0].play();
+	        		$("#playbox").addClass("btn_musicplay").removeClass("btn_music");
+	        	}else{
+	        		$("#mp3")[0].pause();
+	        		$("#playbox").addClass("btn_music").removeClass("btn_musicplay");
+	        	}
+	        });
+		});
+
+	    // music
+	    function audioAutoPlay(id){  
+        var audio = document.getElementById(id);  
+        audio.play();  
+        document.addEventListener("WeixinJSBridgeReady", function () {  
+           audio.play();  
+        }, false);  
+        document.addEventListener('YixinJSBridgeReady', function() {  
+           audio.play();  
+        }, false);  
+	   }  
+	   audioAutoPlay('mp3');
+
+
+	   // position 返回
+	   $("#position_back").on("click",function(){
+	     // alert("alert");
+	     // window.history.back(); 
+	   });
+
+
+	   $("#jumptimeline").on("click",function(){
+	    $("title").html("这些年！"); 
+	  });
+
+
+	  $("#jumpbtn").on("click",function(){
+	    $("title").html("地址：河南宁陵"); 
+	  });
+
+	  $("#recobtn").on("click",function(){
+	    $("title").html("介绍"); 
+	  });
+
+	  $("#mesboard").on("click",function(){
+	    $("title").html("留言板"); 
+	    $.ajax({url:"../mysql.php",success:function(result){
+			$("#messagesql").html(result);
+		}});
+	  });
+
+	  //Device方向
+	  $(window).on("orientationchange",function(event){
+	  	if (event.orientation=="portrait") {
+	  		// alert("竖屏");
+	  	}else{
+	  		// alert("横屏");
+	  		// alert('竖屏浏览吧，少年~~~');
+	  	};
+	  });
+
+	});
+
+
+
+
+	//Page timeline
+	$(document).on("pageinit","#timeline",function(){
+		var width  = (window.screen.width-20);
+	    var height = (window.screen.width-20)/400*600;
+		var mySlide3 = new Slide3D('.yearsturn', {
+			width: width,
+			height:height,
+			effect: 'turn',  // flip | turn | slide | flat | fragment
+			sources: ['http://youc.oss-cn-beijing.aliyuncs.com/year5.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/year00.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/year0.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/year2.png'],
+			box:{
+				rows: 16,
+				cols: 6 
+			},
+			pagination: false, // 是否添加分页器
+			paginationClickable: false,
+			autoplay: 2000
+			// autoplayDisableOnInteraction : false
+		});
+        
+	});
+
+	window.addEventListener("popstate", function(e) {  
+	    if (e.state) {
+	        WeixinJSBridge.call('closeWindow');
+	    };
+	}, false);
+
+
+</script>
+</head>
+
+
+<body>
+
+   <!-- icon -->
+   <div id='wx_pic' style='margin:0 auto;display:none;'>
+		<img src="http://youc.oss-cn-beijing.aliyuncs.com/welcome.png">
+	</div>
+
+
+    <!-- Page One -->
+    <div data-role="page" id="pageone">
+	    <!-- welcome title -->
+		<div id="mycon" style="width=100px,height=100px">👏 👏 👏 👏 👏 👏 👏 👏 👏 👏 👏 👏 👏</div>
+		<!-- slide3D -->
+		<div class="container3D turn">
+			<div class="wrapper3D">
+			</div>
+			<div class="slide3D-pagination"></div>
+			<div class="slide3D-prev-button"></div>
+			<div class="slide3D-next-button"></div>
+		</div>
+		<!-- welcome footer -->
+		<div id="myconfoot" style="width=100px,height=100px">👏 👏 👏 👏 👏 👏 👏 👏 👏 👏 👏 👏 👏</div>
+
+		<!-- 地址 -->
+		<div id="positionbtn">
+			<div class="jump">
+		    	<a id ="jumptimeline" href="#timeline" data-transition="slide">这些年</a>
+		    </div>
+		    <div class="jump">
+		    	<a id ="jumpbtn" href="#position" data-transition="slide">地址</a>
+		    </div>
+		    <div class="jump">
+		    	<a id ="recobtn" href="#recom" data-transition="slide">介绍</a>
+		    </div>
+		    <div class="jump">
+		    	<a id ="mesboard" href="#message" data-transition="slide">留言板</a>
+		    </div>
+		</div>
+
+		<!-- music -->
+		<!-- <audio autoplay="true" loop="true" src="http://youc.oss-cn-beijing.aliyuncs.com/music.mp3"></audio> -->
+		<span id="playbox" ></span>
+        <audio id="mp3" loop="true" src="http://youc.oss-cn-beijing.aliyuncs.com/music.mp3"></audio>
+    </div>
+
+
+
+    <!-- Page Position -->
+    <div data-role="page" id="position">
+	  <div data-role="content">
+		<div id="containermap" style="width:100%;height:560px"></div>
+		<a href="#pageone" id="position_topback"></a>
+		<a href="#pageone" id="position_back"></a>
+	  </div>
+	</div> 
+
+
+	<!-- Page Recom -->
+    <div data-role="page" id="recom">
+	  <div data-role="content">
+	    <div data-role="collapsible-set" data-inset="false">
+	      <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>小故事！</h3>
+	  	    <p>藏在心中的小秘密！</p>
+	      </div>
+	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>那些年！</h3>
+	        <p>匆匆流年诞生了我们六年的相伴！</p>
+	      </div>
+	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>我们！</h3>
+	        <p>心相随，生相伴！</p>
+	      </div>
+	  </div>
+	    <a href="#pageone" id="recom_topback"></a>
+		<a href="#pageone" id="recom_back"></a>
+	  </div>
+	</div> 
+
+
+	<!-- Page 时间轴 -->
+    <div data-role="page" id="timeline">
+	    <div class="container3D yearsturn">
+			<div class="wrapper3D"></div>
+			<div class="slide3D-pagination"></div>
+			<div class="slide3D-prev-button"></div>
+			<div class="slide3D-next-button"></div>
+		</div>
+	    <a href="#pageone" id="time_topback"></a>
+        <a href="#pageone" id="time_back"></a>
+	</div> 
+
+
+	<!-- Page 留言板 -->
+    <div data-role="page" id="message">
+        <div id="messagesql"></div>
+	    <a href="#pageone" id="message_topback"></a>
+        <a href="#pageone" id="message_back"></a>
+
+        <div id="myDiv">
+			电话: <input id="tel" name="tel" type="number" value=""/>
+			留言: <textarea id="mess" rows="5" cols="25"></textarea>
+			<!-- <input id="mess" name="mess" type="text" value=""/><br> -->
+			<button type="button" id="liuyan" onclick="writeDoc()">留言</button>
+			<!-- <a id="liuyan" data-role="button" data-inline="true">留言</a> -->
+		</div>
+	</div> 
+
+
+	<script src="js/slide3D-1.2.1.min.js"></script>
+	<script id="scripts">
+	    var width  = (window.screen.width-20);
+	    var height = (window.screen.width-20)/400*600;
+		var mySlide3 = new Slide3D('.turn', {
+			width: width,
+			height:height,
+			effect: 'turn',  // flip | turn | slide | flat | fragment
+			sources: ['http://youc.oss-cn-beijing.aliyuncs.com/slide_0.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/slide_01.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/slide_3.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/slide_5.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/slide_6.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/slide_9.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle0.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle1.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle2.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle3.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle4.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle5.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle6.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle7.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle8.png',
+			'http://youc.oss-cn-beijing.aliyuncs.com/circle9.png'],
+			box:{
+				rows: 16,
+				cols: 6 
+			},
+			pagination: false, // 是否添加分页器
+			paginationClickable: false,
+			autoplay: 2000
+			// autoplayDisableOnInteraction : false
+		});
+
+        
+
+        
+		function initialize() {  
+	       var mp = new BMap.Map('containermap');  
+	       // 115.331124     34.454898 
+	       point = new BMap.Point(115.331124, 34.454898);
+	       mp.centerAndZoom(point, 12);  
+
+	       var marker = new BMap.Marker(point);       // 创建标注    
+	       mp.addOverlay(marker);                     // 将标注添加到地图中
+
+	       mp.addEventListener("dragend", function(){    
+	       var center = mp.getCenter();    
+	       // alert("地图中心点变更为：" + center.lng + ", " + center.lat);    
+	       });
+        }  
+
+       //location 
+	    function loadScript() {  
+	      var script = document.createElement("script");   
+	      script.src = "http://api.map.baidu.com/api?v=2.0&ak=CCXRXGje8oBWdghR3qG2VA8GXMZnkuup&callback=initialize";
+	      document.body.appendChild(script);  
+	    } 
+	    window.onload = loadScript; 
+
+
+        // 留言
+	    function writeDoc(){
+			var tel = document.getElementById('tel').value;
+			var mess= document.getElementById('mess').value;
+			// alert(mess.length);
+			if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(tel))||tel.length!=11){
+		        alert("输入正确的手机号啊~");
+		    }else{
+		    	if (mess.length == 0) {
+			    	alert("输入留言呀~");
+		    	}else{
+		    		// alert("successful");
+		    		// document.getElementById('mess').value = '';
+		    		// alert($('input[name="mess"]').value());
+					$.post("../insert.php",{
+						message:mess,
+						tel:tel,
+					},
+					function(data,status){
+						$.ajax({url:"../mysql.php",success:function(result){
+			                $("#messagesql").html(result);
+		                }});
+						alert("谢谢留言！");
+						document.getElementById('mess').value = '';
+					});
+		    	}
+		    }
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+/*--------------------------全--局-------------------------------*/
+body{
+	margin:0;
+	padding:0px;
+	font-size:14px;
+	font-family: "微软雅黑", "宋体", "Trebuchet MS", Tahoma, Arial, sans-serif;
+	/*background:url("../images/bg-top.png") repeat-x 0 0;*/
+	color: red;
+}
+
+#pageone{
+	padding:10px;
+
+}
+
+#timeline{
+	padding: 10px;
+	padding-bottom: 0px;
+
+}
+
+.container3D{
+
+	border-radius:5px 5px 5px 5px;
+}
+
+/*去除底部loading*/
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0} 
+
+
+/*music btn*/
+.btn_music{
+	width: 35px;
+    height: 35px;
+    background: url(http://youc.oss-cn-beijing.aliyuncs.com/play.png) no-repeat center center;
+    background-size: 100% auto;
+    position: fixed;
+    z-index: 10000;
+    right: 10px;
+    top: 50px;
+}
+.btn_musicplay{
+	width: 35px;
+    height: 35px;
+    background: url(http://youc.oss-cn-beijing.aliyuncs.com/stop.png) no-repeat center center;
+    background-size: 100% auto;
+    position: fixed;
+    z-index: 10000;
+    right: 10px;
+    top: 50px;
+}
+
+
+
+#mycon{
+	margin:0;
+	padding:0px;
+	padding-top: 10px;
+	color: rgb(255,193,50);
+	text-align: center;
+	overflow: hidden;
+}
+
+#myconfoot{
+	margin:0;
+	padding: 0;
+	padding-top: 10px;
+	color: rgb(255,193,50);
+	text-align: center;
+	overflow: hidden;
+}
+
+#slidecontent{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 0px;
+}
+
+/*地址*/
+#positionbtn{
+	position:fixed;
+	margin: 0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius:0px 5px 5px 0px;
+	width: 70px;
+	height: 130px;
+	background-color: black;
+	opacity:0.5;
+	left:10px;
+	top:200px;
+	z-index:1;
+
+}
+
+.jump{
+	margin: 0;
+	padding-left: 6px;
+	height: 30px;
+	text-align: left;
+}
+
+#jumpbtn{
+	color: white;
+	font-size:13px;
+	font-family:"Times New Roman",Georgia,Serif;
+	font-style:oblique;
+	text-decoration:none;
+}
+#jumptimeline{
+	color: white;
+	font-size:13px;
+	font-family:"Times New Roman",Georgia,Serif;
+	font-style:oblique;
+	text-decoration:none;
+}
+
+#recobtn{
+	color: white;
+	font-size:13px;
+	font-family:"Times New Roman",Georgia,Serif;
+	font-style:oblique;
+	text-decoration:none;
+}
+
+#mesboard{
+	color: white;
+	font-size:13px;
+	font-family:"Times New Roman",Georgia,Serif;
+	font-style:oblique;
+	text-decoration:none;
+}
+
+
+/*百度地图*/
+#position_back{
+	position:absolute;
+	padding: 10px;
+	width: 94px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.6;
+	left:17px;
+	top:513px;
+	z-index:1;
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:66px 64px;
+
+	/*http://youc.oss-cn-beijing.aliyuncs.com/back.png*/
+	/*font-family:"Times New Roman",Georgia,Serif;
+	font-style:oblique;
+	text-decoration:none;*/
+}
+
+#position_topback{
+	position:absolute;
+	padding: 10px;
+	width: 94px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.6;
+	left:17px;
+	top:413px;
+	z-index:1;
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:66px 64px;
+}
+
+
+/*music*/
+/*#music{
+	display: none;
+	width: 80px;
+	height: 80px;
+}
+*/
+/*timeline*/
+#time_back{
+	position:fixed;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.9;
+	left:10px;
+	top:520px;
+	z-index:10000;
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:64px 64px;
+}
+
+#time_topback{
+	position:fixed;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.9;
+	left:10px;
+	top:440px;
+	z-index:10000;
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:64px 64px;
+}
+
+/*介绍*/
+#recom_back{
+	position:fixed;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.5;
+	left:10px;
+	top:520px;
+	z-index:10000;
+
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:64px 64px;
+}
+
+#recom_topback{
+
+	position:fixed;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.5;
+	left:10px;
+	top:440px;
+	z-index:10000;
+
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:64px 64px;
+}
+
+#recom{
+	margin: 0px;
+	padding: 10px;
+}
+
+h3{
+	color: lightgray;
+}
+
+/*留言板*/
+#message{
+	overflow: scroll;
+}
+
+#messagesql{
+	margin: 0px;
+	padding: 10px;
+	color: orange;
+	font-size:13px;
+	font-family:"Times New Roman",Georgia,Serif;
+	font-style:oblique;
+	text-decoration:none;
+}
+
+#message_topback{
+
+    position:fixed;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.5;
+	left:10px;
+	top:440px;
+	z-index:10000;
+
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:64px 64px;
+}
+
+#message_back{
+
+	position:fixed;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;
+	/*border-radius:5px 5px 5px 5px;*/
+	background-color: black;
+	opacity:0.5;
+	left:10px;
+	top:520px;
+	z-index:10000;
+
+
+	background:url(http://youc.oss-cn-beijing.aliyuncs.com/back.png) no-repeat;
+	background-size:64px 64px;
+}
+
+/*留言板*/
+#myDiv{
+	position: fixed;
+	top: 50px;
+	right: 20px;
+	width: 220px;
+	height: 300px;
+	/*background-color: white;*/
+	font-size:16px;
+	font-family: "微软雅黑", "宋体", "Trebuchet MS", Tahoma, Arial, sans-serif;
+	color: black;
+	opacity: 0.8;
+}
+
+#tel{
+	width: 200px;
+	/*height: 15px;*/
+	border: 0px;
+	/*border-bottom: 1px solid black;*/
+	border-radius: 0px;
+	opacity: 0.5;
+}
+
+/*#mess{
+	width: 200px;
+	height: 15px;
+	border: 0px;
+	border-bottom: 1px solid orange;
+	border-radius: 0px;
+}*/
+
+
+
+#liuyan{
+	width: 200px;
+	height: 20px;
+	border-radius: 5px;
+	border: 0px;
+	color: white;
+	/*background-color: orange;*/
+}
+
