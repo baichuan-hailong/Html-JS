@@ -191,17 +191,17 @@
     <div data-role="page" id="recom">
 	  <div data-role="content">
 	    <div data-role="collapsible-set" data-inset="false">
-	      <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
-	        <h3>小故事！</h3>
-	  	    <p>藏在心中的小秘密！</p>
+    	  <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>日期！</h3>
+	  	    <p>10月5号（农历八月十六）</p>
 	      </div>
-	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
-	        <h3>那些年！</h3>
-	        <p>匆匆流年诞生了我们六年的相伴！</p>
+	      <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+	        <h3>地点！</h3>
+	  	    <p>河南 宁陵县！</p>
 	      </div>
 	      <div data-role="collapsible" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
 	        <h3>我们！</h3>
-	        <p>心相随，生相伴！</p>
+	        <p>六年的时间我们觉得彼此很靠谱！心相随，生相伴！</p>
 	      </div>
 	  </div>
 	    <a href="#pageone" id="recom_topback"></a>
@@ -311,9 +311,6 @@
 		    	if (mess.length == 0) {
 			    	alert("输入留言呀~");
 		    	}else{
-		    		// alert("successful");
-		    		// document.getElementById('mess').value = '';
-		    		// alert($('input[name="mess"]').value());
 					$.post("../insert.php",{
 						message:mess,
 						tel:tel,

@@ -10,15 +10,15 @@
         die("连接失败: " . $conn->connect_error);
     } 
      
+    $conn->query('set names utf8');
     $sql = "SELECT id, message, last_update FROM messageBoard_table";
     $result = $conn->query($sql);
-     
 
 
     // 输出数据
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo $row["id"] . "、". $row["message"]."<br>";
+            echo "Tip:" . "、". $row["message"]."<br>";
         }
     } else {
         echo "赶紧留言吧！";

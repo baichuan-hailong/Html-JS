@@ -13,11 +13,9 @@
         die("连接失败: " . $conn->connect_error);
     } 
      
-
+    $conn->query('set names utf8');
     // 插入数据
-    $sql = "INSERT INTO messageBoard_table (message,tel)
-    VALUES ('$mes','$tel')";
-    
+    $sql = "INSERT INTO messageBoard_table (message,tel) VALUES ('$mes','$tel')";
     if ($conn->query($sql) === TRUE) {
         echo "新记录插入成功";
     } else {
