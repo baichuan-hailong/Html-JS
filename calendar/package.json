@@ -1,0 +1,32 @@
+{
+  "name": "zane-calendar",
+  "version": "1.2.2",
+  "description": "很全面的时间日历插件选择器",
+  "homepage": "http://blog.seosiwei.com/detail/8",
+  "repository": "wangweianger/zane-data-time-calendar",
+  "author": "zane <752636052@qq.com> (http://blog.seosiwei.com/)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build"
+  },
+  "keywords": [
+    "zane",
+    "date",
+    "zane-calendar"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.8.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^3.0.0"
+  }
+}
