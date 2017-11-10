@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>zane 的日历插件</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<style>
+		*{
+			padding:0;
+			margin:0;}
+		body{
+			width: 1000px;
+			margin: 0 auto;
+			background: #eff;
+		}
+
+		.main{
+			overflow: hidden;
+		}
+		.main .demo{
+			float: left;
+			width: 99%;
+			font-size: 12px;
+			margin: 40px 0;
+		}
+
+		.main .demo span{
+			display: inline-block;
+			width: 60px;
+			background-color: red;
+		}
+		.main .demo .input{
+			height: 25px;
+			line-height: 35px;
+			padding-left: 10px;
+			width: 200px;
+			margin-left: 10px;
+			border: solid 0px #ddd;
+			background: #fff;
+			display: inline-block;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="./css/zane-calendar.css">
+	<script src="./js/zane-calendar.js"></script>
+</head>
+
+
+<body>	
+	
+	<div class="main">
+		<div class="demo">
+			<span>英文版:</span>
+			<input id="demo2" type="text" class="input" placeholder="yyyy-MM-dd">
+		</div>
+	</div>
+
+
+	<script>
+
+		zaneDate({
+			elem:'#demo2',
+			format:'yyyy-MM-dd',
+			lang:'cn',
+			width:250,  		//插件宽度配置   250 <= X <= 500
+	        height:250, 		//插件高度配置   250 <= X <= 350
+			mounted:()=>{
+			   //alert("mounted...");
+			}, //插件加载完成之后调用
+	        change:(fulltime,begintime,endtime)=>{
+	        	alert("change...");
+	        }, //时间变更之后调用
+	        done:(fulltime,begintime,endtime)=>{
+	            alert("done...");
+	        }
+	         //选择完成之后调用
+		})
+	</script>
+
+
+
+	
+</body>
+</html>
